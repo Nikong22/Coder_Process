@@ -243,3 +243,35 @@ function checkAuthentication(req, res, next){
         res.redirect('/');
     }
 }
+
+app.get('/randoms', (req,res) => {
+  const cant = req.query.cant ? req.query.cant : 100000000
+  console.log(`cantidad: ${cant}`)
+  const computo = fork('./random.js');
+  computo.send(cant);
+  computo.on('message', valores => res.end(mostrarValores(valores)));
+});
+
+const mostrarValores = (valores) => {
+  let resultado = ''
+  for (const valor of Object.entries(valores)) {
+    resultado += valor[0] + ': ' + valor[1] + '\n'
+  }
+  return resultado
+}
+
+app.get('/comprobar', (req,res) => {
+  res.json('no se bloquea');
+});
+
+app.get('/info', (req,res) => {
+  const argumentos = []
+  process.argv.forEach((val, index) => {
+    if(index > 1){
+      argumentos.push(val)
+    }
+  })
+  res.json(`argumentos de entrada: ${argumentos} - S.O.: ${process.platform} - Version Node ${process.version} - Uso memoria: ${process.memoryUsage()} - Path: ${process.cwd()} - Process ${process.pid} - Carpeta ${process.cwd()}` )
+});
+
+app.get('*', routes.failRoute);

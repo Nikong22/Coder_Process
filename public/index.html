@@ -33,8 +33,13 @@
         if(username != ""){
           document.getElementById("div_usuario").style.visibility='visible'
           document.getElementById("username").innerHTML=username
+          if(avatar != ""){
+            document.getElementById("avatar").style.visibility='visible'
+            document.getElementById("avatar").src=avatar
+          }
         }else{
           document.getElementById("div_usuario").style.visibility='hidden'
+          document.getElementById("avatar").style.visibility='hidden'
           document.getElementById("username").innerHTML=""
         }
       }
