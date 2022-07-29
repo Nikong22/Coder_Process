@@ -14,6 +14,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const route = require('./route'); 
 const {obtenerUsuario, obtenerUsuarioId, passwordValida} = require('./utils/util');
 const bCrypt = require('bCrypt');
+const {fork} = require('child_process');
+require('dotenv').config({path: __dirname + '/.env'})
 
 const app = express();
 const PORT = 8080;

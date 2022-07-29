@@ -9,6 +9,7 @@
   "author": "Nicolás Cammarota",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.0.1",
     "@faker-js/faker": "^7.3.0",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^4.6.0",
